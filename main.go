@@ -49,14 +49,12 @@ func (br *BotRunner) Close() {
 
 func (br *BotRunner) FsListen() {
 	for event := range br.watcher.Events {
-		fmt.Printf("New file event:\t%+v\n", event)
-		cmd := ""
-		_, err := fmt.Sscanf(strings.ToLower(event.Name), scriptDir+"/%s", &cmd)
-		if err != nil || cmd == "" {
+		if !strings.HasSuffix(event.Name, ".lua") {
 			continue
 		}
-		cmd = strings.Split(cmd, ".")[0]
-		fmt.Println(event.Name, "->", cmd)
+
+		cmd := strings.TrimSuffix(path.Base(event.Name), ".lua")
+
 		if event.Op&fsnotify.Create == fsnotify.Create {
 			br.RegisterCommand(cmd)
 		}
@@ -72,6 +70,7 @@ func (br *BotRunner) FsListen() {
 
 func (br *BotRunner) DeleteCommand(cmd string) {
 	if luacmd, ok := br.commands[cmd]; ok {
+		fmt.Println("Deleting the [" + cmd + "] command.")
 		luacmd.Close()
 		delete(br.commands, cmd)
 	}
@@ -85,6 +84,7 @@ func (br *BotRunner) RegisterCommand(command string) error {
 	if err != nil {
 		return err
 	}
+	fmt.Println("Registering the [" + command + "] command.")
 	br.commands[command] = luar.NewLuaObjectFromName(br.state, "handler")
 	return nil
 }
@@ -141,7 +141,6 @@ func main() {
 }
 
 func msgHandler(session *discordgo.Session, msg *discordgo.MessageCreate) {
-	fmt.Println("Msg Received?", msg.Author.Username)
 	if msg.Author.ID == session.State.User.ID {
 		return
 	}
