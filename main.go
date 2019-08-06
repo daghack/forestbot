@@ -107,9 +107,9 @@ func init() {
 
 	state := luar.Init()
 	luar.Register(state, "", luar.Map{
-		"send_msg":         dw.SendMessageToChannel,
-		"set_channel_name": dw.SetChannelName,
-		"get_channel":      dw.GetChannelInfo,
+		"send_msg":    dw.SendMessageToChannel,
+		"set_channel": dw.SetChannel,
+		"get_channel": dw.GetChannelInfo,
 	})
 
 	watcher, err := fsnotify.NewWatcher()
@@ -155,7 +155,7 @@ func msgHandler(session *discordgo.Session, msg *discordgo.MessageCreate) {
 	}
 
 	if cmd, ok := runner.commands[command]; ok {
-		err = cmd.Call(nil, msg)
+		err = cmd.Call(nil, msg, contentPieces[1:])
 		errH(err)
 	}
 }

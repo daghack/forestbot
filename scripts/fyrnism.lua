@@ -1,3 +1,4 @@
+math.randomseed(os.time())
 function handler(msg)
 	local category = {"singular", "plural"}
 	local c = random_from(category)

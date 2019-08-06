@@ -32,8 +32,11 @@ func (dw *DWrapper) SendMessageToChannel(channelId, msgId string) {
 	dw.session.ChannelMessageSend(channelId, msgId)
 }
 
-func (dw *DWrapper) SetChannelName(channelId, name string) {
-	dw.session.ChannelEdit(channelId, name)
+func (dw *DWrapper) SetChannel(channelId, name string, position int) {
+	dw.session.ChannelEditComplex(channelId, &discordgo.ChannelEdit{
+		Name:     name,
+		Position: position,
+	})
 }
 
 func (dw *DWrapper) AddHandler(h interface{}) {
