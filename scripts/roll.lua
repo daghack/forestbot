@@ -28,12 +28,23 @@ function fair_roll(die)
 end
 
 function cheating_roll(author, die)
+	print(die, last.die)
+	print(author.Username, last.user)
 	if die ~= last.die or author.Username == last.user then
+		if die ~= last.die then
+			print("Dice don't match")
+		end
+		if author.Username == last.user then
+			print("Usernames match")
+		end
+		print("Fair dice roll")
 		return fair_roll(die)
 	end
 	if last.user == "daghack" then
+		print("roll lose or tie")
 		return roll_lose_or_tie(die)
 	elseif author.Username == "daghack" then
+		print("roll win or tie")
 		return roll_win_or_tie(die)
 	end
 	return fair_roll(die)
@@ -57,5 +68,5 @@ function handler(msg, args)
 	end
 
 	local roll = cheating_roll(msg.Author, die)
-	print_roll(msg.ChannelID, msg.Author, i, roll)
+	print_roll(msg.ChannelID, msg.Author, die, roll)
 end

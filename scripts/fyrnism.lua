@@ -8,6 +8,13 @@ function handler(msg)
 
 	local subject = {
 		singular = {
+			"daisy",
+			"daffodil",
+			"sunflower",
+			"pebble",
+			"marble",
+			"rabbit",
+			"bear",
 			"dragon",
 			"raspberry",
 			"fruit tree",
@@ -21,6 +28,13 @@ function handler(msg)
 			"fae"
 		},
 		plural = {
+			"daisies",
+			"daffodils",
+			"sunflowers",
+			"pebbles",
+			"marbles",
+			"rabbits",
+			"bears",
 			"dragons",
 			"raspberries",
 			"fruit trees",
@@ -36,6 +50,11 @@ function handler(msg)
 	local s = random_from(subject[c])
 
 	local object = {
+		"twirling",
+		"sleeping",
+		"sighing",
+		"dreaming",
+		"chanting",
 		"upside-down",
 		"rotting",
 		"twisting",
