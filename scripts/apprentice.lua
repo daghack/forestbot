@@ -53,12 +53,23 @@ function set_reason(userstr)
 end
 
 function base_reason()
-	local br = {
-		"they've been seen wearing red, and only Apprentices wear red",
-		"rumor has it they've been spotted using Dream Magic. Since Dream Magic is illegal, we know that only Apprentices use it",
+	local common = {
 		"they've been seen dining with Ayan, making fun of the Returned",
+		"rumor has it they have an hourglass tattoo on their hand",
+		"I've seen them doodling hearts around Ayan's name in the tavern"
+	}
+	local uncommon = {
+		"rumor has it they've been spotted using Dream Magic. Since Dream Magic is illegal, we know that only Apprentices use it",
+		"they play **WAY** too much chess",
+		"people have seen them sleeping, and that's something only an Apprentice would do"
+	}
+	local rare = {
+		"they've been seen wearing red, and only Apprentices wear red",
+		"when they woke up this morning, the word 'Apprentice' was scrawled on their forehead",
 		"we all know they worship the Moon, and the Moon only comes out when Ayan comes out"
 	}
+	local choice_set = {common, common, common, uncommon, uncommon, rare}
+	local br = choice_set[math.random(#choice_set)]
 	return br[math.random(#br)]
 end
 
@@ -72,7 +83,7 @@ function associate_reason()
 		". It's obvious",
 		". Everybody knows",
 		". It's common knowledge",
-		"and rumor has it"
+		" and rumor has it"
 	}
 	local c1 = ar_1[math.random(#ar_1)]
 	local c2 = ar_2[math.random(#ar_2)]
