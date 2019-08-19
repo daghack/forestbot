@@ -145,8 +145,8 @@ func msgHandler(session *discordgo.Session, msg *discordgo.MessageCreate) {
 		return
 	}
 
-	content := strings.TrimSpace(strings.ToLower(msg.Content))
-	contentPieces := strings.Split(content, " ")
+	contentPieces := strings.Split(strings.TrimSpace(msg.Content), " ")
+	contentPieces[0] = strings.ToLower(contentPieces[0])
 
 	command := ""
 	_, err := fmt.Sscanf(contentPieces[0], commandPrefix+"%s", &command)
