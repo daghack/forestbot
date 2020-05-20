@@ -9,7 +9,7 @@ type DWrapper struct {
 }
 
 func New() (*DWrapper, error) {
-	discord, err := discordgo.New("Bot NTk2MDMzMDMzNTY4NTE4MTY4.XRzt1w.2Y5J2wc9s3JZsgF7YqoErCybYDw")
+	discord, err := discordgo.New("Bot NTk2MDMzMDMzNTY4NTE4MTY4.XUC4WQ.sXRhCgQETIc_aTFOcJlsJZvh1Zs")
 	if err != nil {
 		return nil, err
 	}
